@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { NextPage } from 'next';
-import Nav from '../components/Nav';
+import Nav from 'components/Nav';
 
 const Home: NextPage = () => (
   <div>

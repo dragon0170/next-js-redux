@@ -12,11 +12,11 @@ import { all } from 'redux-saga/effects';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { fromJS } from 'immutable';
 
-export interface StoreState {
+export class StoreState {
   test: TestState;
 }
 
-interface SerializedStoreState {
+class SerializedStoreState {
   test;
 }
 
@@ -36,9 +36,12 @@ const bindMiddleware = (middleware): StoreEnhancer => {
 };
 
 export function serialize(state: StoreState): SerializedStoreState {
-  return {
-    test: state.test.toJS(),
-  };
+  if (state) {
+    return {
+      test: state.test.toJS(),
+    };
+  }
+  return new SerializedStoreState();
 }
 
 export function deserialize(state: SerializedStoreState): StoreState {
@@ -47,7 +50,7 @@ export function deserialize(state: SerializedStoreState): StoreState {
       test: fromJS(state.test),
     };
   }
-  return null;
+  return new StoreState();
 }
 
 export default function configureStore(

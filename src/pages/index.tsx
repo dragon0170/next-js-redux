@@ -6,59 +6,11 @@ import { connect } from 'react-redux';
 import { StoreState } from 'store/configureStore';
 import { bindActionCreators } from 'redux';
 import { actionCreators as testActions } from 'store/test/action';
-import { fromJS, List, Record } from 'immutable';
 
 interface Props {
   nickname: string;
   TestActions: typeof testActions;
 }
-
-// export const MenuRecord = Record({
-//   name: 'test',
-// });
-//
-// export class Menu extends MenuRecord {
-//   public readonly name!: string;
-// }
-//
-// export const MenuStateRecord = Record({
-//   currentMenu: 'Archiving Box',
-//   menuList: List<Menu>([MenuRecord()]),
-// });
-//
-// export class MenuState extends MenuStateRecord {
-//   public readonly currentMenu!: string;
-//
-//   public readonly menuList!: List<Menu>;
-// }
-//
-// export interface TestState {
-//   menu: MenuState;
-// }
-//
-// const initialTestState: TestState = {
-//   menu: MenuStateRecord(),
-// };
-//
-// interface Result {
-//   menu;
-// }
-//
-// function serialize(state: TestState): Result {
-//   return {
-//     menu: state.menu.toJS(),
-//   };
-// }
-//
-// const serialized = serialize(initialTestState);
-//
-// function deserialize(state: Result): TestState {
-//   return {
-//     menu: fromJS(state.menu),
-//   };
-// }
-//
-// const deserialized = deserialize(serialized);
 
 const Home: NextPage<Props> = ({ nickname, TestActions }) => (
   <div>

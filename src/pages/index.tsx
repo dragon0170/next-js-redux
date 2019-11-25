@@ -2,8 +2,17 @@ import React from 'react';
 import Head from 'next/head';
 import { NextPage } from 'next';
 import Nav from 'components/Nav';
+import { connect } from 'react-redux';
+import { StoreState } from 'store/configureStore';
+import { bindActionCreators } from 'redux';
+import { actionCreators as testActions } from 'store/test/action';
 
-const Home: NextPage = () => (
+interface Props {
+  nickname: string;
+  TestActions: typeof testActions;
+}
+
+const Home: NextPage<Props> = ({ nickname, TestActions }) => (
   <div>
     <Head>
       <title>Ticle</title>
@@ -13,6 +22,8 @@ const Home: NextPage = () => (
     <Nav />
 
     <div className="hero">
+      <p>{nickname}</p>
+      <input value={nickname} onChange={(e) => {TestActions.changeNickname(e.currentTarget.value)}} />
       <h1 className="title">Welcome to Next.js!</h1>
       <p className="description">
         To get started, edit <code>pages/index.js</code> and save to reload.
@@ -88,4 +99,17 @@ const Home: NextPage = () => (
   </div>
 );
 
-export default Home;
+Home.getInitialProps = async (props): Promise<Props> => {
+  const { ctx }: any = props;
+  ctx.store.dispatch(testActions.getInfo());
+  return null;
+};
+
+export default connect(
+  ({ test }: StoreState) => ({
+    nickname: test.nickname,
+  }),
+  dispatch => ({
+    TestActions: bindActionCreators(testActions, dispatch),
+  }),
+)(Home);

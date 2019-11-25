@@ -1,4 +1,3 @@
-import { TestState } from 'store/test/action';
 import {
   applyMiddleware,
   combineReducers,
@@ -7,13 +6,18 @@ import {
   StoreEnhancer,
 } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import test from 'store/test/reducer';
+import test, { TestState } from 'store/test/reducer';
 import TestSaga from 'store/test/saga';
 import { all } from 'redux-saga/effects';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { fromJS } from 'immutable';
 
 export interface StoreState {
   test: TestState;
+}
+
+interface SerializedStoreState {
+  test;
 }
 
 const modules = combineReducers<StoreState>({
@@ -30,6 +34,21 @@ const bindMiddleware = (middleware): StoreEnhancer => {
   }
   return applyMiddleware(...middleware);
 };
+
+export function serialize(state: StoreState): SerializedStoreState {
+  return {
+    test: state.test.toJS(),
+  };
+}
+
+export function deserialize(state: SerializedStoreState): StoreState {
+  if (state) {
+    return {
+      test: fromJS(state.test),
+    };
+  }
+  return null;
+}
 
 export default function configureStore(
   initialState,

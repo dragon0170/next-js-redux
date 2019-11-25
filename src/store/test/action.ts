@@ -10,7 +10,3 @@ export const actionCreators = {
   getInfo: createAction(GET_INFO)(),
   changeNickname: createAction(CHANGE_NICKNAME)<string>(),
 };
-
-export interface TestState {
-  nickname: string;
-}

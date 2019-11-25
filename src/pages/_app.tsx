@@ -3,7 +3,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
-import createStore from 'store/configureStore';
+import createStore, { deserialize, serialize } from 'store/configureStore';
 import { Store } from 'redux';
 
 interface Props {
@@ -31,4 +31,7 @@ class MyApp extends App<Props> {
   }
 }
 
-export default withRedux(createStore)(withReduxSaga(MyApp));
+export default withRedux(createStore, {
+  serializeState: state => serialize(state),
+  deserializeState: state => deserialize(state),
+})(withReduxSaga(MyApp));

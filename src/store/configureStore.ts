@@ -6,18 +6,40 @@ import {
   StoreEnhancer,
 } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import test, { TestState } from 'store/test/reducer';
+import test, { initialTestState, TestState } from 'store/test/reducer';
 import TestSaga from 'store/test/saga';
 import { all } from 'redux-saga/effects';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { fromJS } from 'immutable';
 
-export class StoreState {
+export interface StoreState {
   test: TestState;
 }
 
-class SerializedStoreState {
-  test;
+interface SerializedStoreState {
+  test: object;
+}
+
+export function serialize(state: StoreState): SerializedStoreState {
+  if (state) {
+    return {
+      test: state.test.toJS(),
+    };
+  }
+  return {
+    test,
+  };
+}
+
+export function deserialize(state: SerializedStoreState): StoreState {
+  if (state) {
+    return {
+      test: fromJS(state.test),
+    };
+  }
+  return {
+    test: initialTestState,
+  };
 }
 
 const modules = combineReducers<StoreState>({
@@ -35,32 +57,14 @@ const bindMiddleware = (middleware): StoreEnhancer => {
   return applyMiddleware(...middleware);
 };
 
-export function serialize(state: StoreState): SerializedStoreState {
-  if (state) {
-    return {
-      test: state.test.toJS(),
-    };
-  }
-  return new SerializedStoreState();
-}
-
-export function deserialize(state: SerializedStoreState): StoreState {
-  if (state) {
-    return {
-      test: fromJS(state.test),
-    };
-  }
-  return new StoreState();
-}
-
 export default function configureStore(
-  initialState,
+  preloadedState,
   { isServer, req = null },
 ): Store<StoreState> {
   const sagaMiddleware = createSagaMiddleware();
   const store: any = createStore(
     modules,
-    initialState,
+    preloadedState,
     bindMiddleware([sagaMiddleware]),
   );
 

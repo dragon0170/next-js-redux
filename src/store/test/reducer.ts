@@ -2,13 +2,13 @@ import { createReducer } from 'typesafe-actions';
 import { Map } from 'immutable';
 import { GET_INFO_SUCCESS, CHANGE_NICKNAME } from './action';
 
-const initialState = Map({
+export const initialTestState = Map({
   nickname: '',
 });
 
-export type TestState = typeof initialState;
+export type TestState = typeof initialTestState;
 
-export default createReducer<TestState>(initialState, {
+export default createReducer<TestState>(initialTestState, {
   [GET_INFO_SUCCESS]: (state, action): TestState => {
     return state.set('nickname', action.payload.nickname);
   },

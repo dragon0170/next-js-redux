@@ -25,6 +25,7 @@ class MyApp extends App<Props> {
     const { Component, pageProps, store } = this.props;
     return (
       <Provider store={store}>
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Component {...pageProps} />
       </Provider>
     );

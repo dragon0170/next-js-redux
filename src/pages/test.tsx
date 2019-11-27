@@ -2,19 +2,9 @@ import React from 'react';
 import Head from 'next/head';
 import { NextPage } from 'next';
 import Nav from 'components/Nav';
-import { connect } from 'react-redux';
-import { StoreState } from 'store/configureStore';
-import { bindActionCreators } from 'redux';
-import { actionCreators as testActions } from 'store/test/action';
 import Link from 'next/link';
 
-interface Props {
-  nickname: string;
-  error: string;
-  TestActions: typeof testActions;
-}
-
-const Home: NextPage<Props> = ({ nickname, error, TestActions }) => (
+const Test: NextPage = () => (
   <div>
     <Head>
       <title>Ticle</title>
@@ -24,17 +14,13 @@ const Home: NextPage<Props> = ({ nickname, error, TestActions }) => (
     <Nav />
 
     <div className="hero">
-      <p>{nickname}</p>
-      <input value={nickname} onChange={(e) => {TestActions.changeNickname(e.currentTarget.value)}} />
-      <button onClick={() => {TestActions.getInfo()}}>Get Info!</button>
-      {error !== '' && <p>{error}</p>}
       <h1 className="title">Welcome to Next.js!</h1>
       <p className="description">
         To get started, edit <code>pages/index.js</code> and save to reload.
       </p>
 
-      <Link href="/test">
-        <a>to test</a>
+      <Link href="/">
+        <a>to home</a>
       </Link>
       <div className="row">
         <a href="https://nextjs.org/docs" className="card">
@@ -106,18 +92,4 @@ const Home: NextPage<Props> = ({ nickname, error, TestActions }) => (
   </div>
 );
 
-Home.getInitialProps = async (props): Promise<Props> => {
-  const { ctx }: any = props;
-  // ctx.store.dispatch(testActions.getInfo());
-  return null;
-};
-
-export default connect(
-  ({ test }: StoreState) => ({
-    nickname: test.get('nickname'),
-    error: test.get('error'),
-  }),
-  dispatch => ({
-    TestActions: bindActionCreators(testActions, dispatch),
-  }),
-)(Home);
+export default Test;

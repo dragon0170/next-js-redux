@@ -14,12 +14,15 @@ export default async (
         });
         res.status(200).json({ nickname: 'kevin' });
       } catch (error) {
-        if (error.response.status === 404 || 400) {
-          res
-            .status(400)
-            .json({ message: '이메일 또는 패스워드를 확인해주세요.' });
+        if (error.response.status !== 500) {
+          res.status(error.response.status).json({
+            msg: '이메일 또는 패스워드를 확인해주세요.',
+            showModal: true,
+          });
         } else {
-          res.status(500).json({ message: '잠시 후에 시도해주세요.' });
+          res
+            .status(error.response.status)
+            .json({ message: '잠시 후에 시도해주세요.', showModal: true });
         }
       }
       break;

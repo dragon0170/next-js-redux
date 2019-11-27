@@ -15,7 +15,7 @@ function* getInfoSaga(
     const response = yield call(getInfoAPI);
     yield put({ type: GET_INFO_SUCCESS, payload: response.data });
   } catch (e) {
-    yield put({ type: GET_INFO_FAILURE, payload: e });
+    yield put({ type: GET_INFO_FAILURE, payload: e.response.data });
   }
 }
 

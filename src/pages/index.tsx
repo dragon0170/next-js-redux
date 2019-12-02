@@ -7,6 +7,7 @@ import { StoreState } from 'store/configureStore';
 import { bindActionCreators } from 'redux';
 import { actionCreators as testActions } from 'store/test/action';
 import Link from 'next/link';
+import NextCookies from 'next-cookies';
 
 interface Props {
   nickname: string;
@@ -108,7 +109,11 @@ const Home: NextPage<Props> = ({ nickname, error, TestActions }) => (
 
 Home.getInitialProps = async (props): Promise<Props> => {
   const { ctx }: any = props;
-  // ctx.store.dispatch(testActions.getInfo());
+  const { accessToken } = NextCookies(ctx);
+  if (ctx.req) {
+    console.log({ accessToken });
+  }
+  ctx.store.dispatch(testActions.getInfo());
   return null;
 };
 

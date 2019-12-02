@@ -12,6 +12,7 @@
     "dotenv": "^8.2.0",
     "immutable": "^4.0.0-rc.12",
     "next": "9.1.4",
+    "next-cookies": "^2.0.3",
     "next-redux-saga": "^4.1.2",
     "next-redux-wrapper": "^4.0.1",
     "react": "16.12.0",

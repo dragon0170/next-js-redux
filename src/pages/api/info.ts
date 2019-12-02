@@ -7,10 +7,11 @@ export default async (
 ): Promise<void> => {
   switch (req.method) {
     case 'GET':
+      console.log(req.cookies.accessToken);
       try {
         const response = await serverAjax.post('sign-in', {
-          email: 'kevin@gmail.com',
-          password: 'kevin1234',
+          email: 'smartcity@gmail.com',
+          password: 'smart1234',
         });
         res.status(200).json({ nickname: 'kevin' });
       } catch (error) {

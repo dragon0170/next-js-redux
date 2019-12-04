@@ -7,6 +7,13 @@ import { StoreState } from 'store/configureStore';
 import { bindActionCreators } from 'redux';
 import { actionCreators as testActions } from 'store/test/action';
 import Link from 'next/link';
+import styled from 'styled-components';
+
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+`;
 
 interface Props {
   nickname: string;
@@ -28,7 +35,7 @@ const Home: NextPage<Props> = ({ nickname, error, TestActions }) => (
       <input value={nickname} onChange={(e) => {TestActions.changeNickname(e.currentTarget.value)}} />
       <button onClick={() => {TestActions.signIn()}}>Get Info!</button>
       {error !== '' && <p>{error}</p>}
-      <h1 className="title">Welcome to Next.js!</h1>
+      <Title>Welcome to Next.js!</Title>
       <p className="description">
         To get started, edit <code>pages/index.js</code> and save to reload.
       </p>
@@ -86,17 +93,6 @@ const Home: NextPage<Props> = ({ nickname, error, TestActions }) => (
           text-decoration: none;
           color: #434343;
           border: 1px solid #9b9b9b;
-          h3 {
-            margin: 0;
-            color: #067df7;
-            font-size: 18px;
-          }
-          p {
-            margin: 0;
-            padding: 12px 0 0;
-            font-size: 13px;
-            color: #333;
-          }
         }
         .card:hover {
           border-color: #067df7;

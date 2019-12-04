@@ -26,7 +26,7 @@ const Home: NextPage<Props> = ({ nickname, error, TestActions }) => (
     <div className="hero">
       <p>{nickname}</p>
       <input value={nickname} onChange={(e) => {TestActions.changeNickname(e.currentTarget.value)}} />
-      <button onClick={() => {TestActions.getInfo()}}>Get Info!</button>
+      <button onClick={() => {TestActions.signIn()}}>Get Info!</button>
       {error !== '' && <p>{error}</p>}
       <h1 className="title">Welcome to Next.js!</h1>
       <p className="description">

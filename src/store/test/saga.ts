@@ -1,24 +1,24 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
-import { getInfoAPI } from 'store/test/api';
+import { signInAPI } from 'store/test/api';
 import {
   actionCreators,
-  GET_INFO,
-  GET_INFO_SUCCESS,
-  GET_INFO_FAILURE,
+  SIGN_IN,
+  SIGN_IN_SUCCESS,
+  SIGN_IN_FAILURE,
 } from './action';
 
-function* getInfoSaga(
-  action: ReturnType<typeof actionCreators.getInfo>,
+function* signInSaga(
+  action: ReturnType<typeof actionCreators.signIn>,
 ): SagaIterator {
   try {
-    const response = yield call(getInfoAPI);
-    yield put({ type: GET_INFO_SUCCESS, payload: response.data });
+    const response = yield call(signInAPI);
+    yield put({ type: SIGN_IN_SUCCESS, payload: response.data });
   } catch (e) {
-    yield put({ type: GET_INFO_FAILURE, payload: e.response.data });
+    yield put({ type: SIGN_IN_FAILURE, payload: e.response.data });
   }
 }
 
 export default function* MyPageSaga(): SagaIterator {
-  yield takeEvery(GET_INFO, getInfoSaga);
+  yield takeEvery(SIGN_IN, signInSaga);
 }

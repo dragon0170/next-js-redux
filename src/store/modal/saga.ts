@@ -3,8 +3,8 @@ import { SagaIterator } from 'redux-saga';
 import { SHOW_ERROR_ALERT } from 'store/modal/action';
 
 function* handleFailureSaga(action): SagaIterator {
-  if (action.payload.showModal) {
-    yield put({ type: SHOW_ERROR_ALERT, payload: action.payload.msg });
+  if (action.payload.showAlert) {
+    yield put({ type: SHOW_ERROR_ALERT, payload: action.payload.message });
   }
 }
 

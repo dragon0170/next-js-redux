@@ -7,13 +7,7 @@ import { StoreState } from 'store/configureStore';
 import { bindActionCreators } from 'redux';
 import { actionCreators as testActions } from 'store/test/action';
 import Link from 'next/link';
-import styled from 'styled-components';
-
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
-`;
+import Button from 'components/Button';
 
 interface Props {
   nickname: string;
@@ -38,8 +32,7 @@ const Home: NextPage<Props> = ({ nickname, error, TestActions }) => (
           TestActions.changeNickname(e.currentTarget.value);
         }}
       />
-      <button
-        type="button"
+      <Button
         onClick={(): void => {
           TestActions.signIn({
             email: 'kevin@gmail.com',
@@ -48,9 +41,9 @@ const Home: NextPage<Props> = ({ nickname, error, TestActions }) => (
         }}
       >
         Get Info!
-      </button>
+      </Button>
       {error !== '' && <p>{error}</p>}
-      <Title>Welcome to Next.js!</Title>
+      <h1 className="title">Welcome to Next.js!</h1>
       <p className="description">
         To get started, edit <code>pages/index.js</code> and save to reload.
       </p>

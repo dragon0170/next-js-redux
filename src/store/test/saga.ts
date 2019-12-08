@@ -12,7 +12,7 @@ function* signInSaga(
   action: ReturnType<typeof actionCreators.signIn>,
 ): SagaIterator {
   try {
-    const response = yield call(signInAPI);
+    const response = yield call(signInAPI, action.payload);
     yield put({ type: SIGN_IN_SUCCESS, payload: response.data });
   } catch (e) {
     yield put({ type: SIGN_IN_FAILURE, payload: e.response.data });

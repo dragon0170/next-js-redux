@@ -76,7 +76,9 @@ export default class Proxy {
             res: NextApiResponse,
           ): Promise<void> {
             try {
-              const response = await this.ajax.get(req.url);
+              const response = await this.ajax.get(req.url, {
+                headers: { Authorization: req.cookies.jwt },
+              });
               res.status(response.status).json(response.data);
             } catch (error) {
               res.status(error.response.status).json(error.response.data);
@@ -89,7 +91,9 @@ export default class Proxy {
             res: NextApiResponse,
           ): Promise<void> {
             try {
-              const response = await this.ajax.post(req.url, req.body);
+              const response = await this.ajax.post(req.url, req.body, {
+                headers: { Authorization: req.cookies.jwt },
+              });
               res.status(response.status).json(response.data);
             } catch (error) {
               res.status(error.response.status).json(error.response.data);
@@ -102,7 +106,9 @@ export default class Proxy {
             res: NextApiResponse,
           ): Promise<void> {
             try {
-              const response = await this.ajax.put(req.url, req.body);
+              const response = await this.ajax.put(req.url, req.body, {
+                headers: { Authorization: req.cookies.jwt },
+              });
               res.status(response.status).json(response.data);
             } catch (error) {
               res.status(error.response.status).json(error.response.data);
@@ -115,7 +121,9 @@ export default class Proxy {
             res: NextApiResponse,
           ): Promise<void> {
             try {
-              const response = await this.ajax.delete(req.url);
+              const response = await this.ajax.delete(req.url, {
+                headers: { Authorization: req.cookies.jwt },
+              });
               res.status(response.status).json(response.data);
             } catch (error) {
               res.status(error.response.status).json(error.response.data);
@@ -128,7 +136,9 @@ export default class Proxy {
             res: NextApiResponse,
           ): Promise<void> {
             try {
-              const response = await this.ajax.head(req.url);
+              const response = await this.ajax.head(req.url, {
+                headers: { Authorization: req.cookies.jwt },
+              });
               res.status(response.status).json(response.data);
             } catch (error) {
               res.status(error.response.status).json(error.response.data);
@@ -141,7 +151,9 @@ export default class Proxy {
             res: NextApiResponse,
           ): Promise<void> {
             try {
-              const response = await this.ajax.patch(req.url, req.body);
+              const response = await this.ajax.patch(req.url, req.body, {
+                headers: { Authorization: req.cookies.jwt },
+              });
               res.status(response.status).json(response.data);
             } catch (error) {
               res.status(error.response.status).json(error.response.data);
@@ -166,7 +178,9 @@ export default class Proxy {
           res: NextApiResponse,
         ): Promise<void> {
           try {
-            const response = await this.ajax.get(req.url);
+            const response = await this.ajax.get(req.url, {
+              headers: { Authorization: req.cookies.jwt },
+            });
             res.status(response.status).json(response.data);
           } catch (error) {
             res
@@ -184,7 +198,9 @@ export default class Proxy {
           res: NextApiResponse,
         ): Promise<void> {
           try {
-            const response = await this.ajax.post(req.url, req.body);
+            const response = await this.ajax.post(req.url, req.body, {
+              headers: { Authorization: req.cookies.jwt },
+            });
             res.status(response.status).json(response.data);
           } catch (error) {
             res
@@ -202,7 +218,9 @@ export default class Proxy {
           res: NextApiResponse,
         ): Promise<void> {
           try {
-            const response = await this.ajax.put(req.url, req.body);
+            const response = await this.ajax.put(req.url, req.body, {
+              headers: { Authorization: req.cookies.jwt },
+            });
             res.status(response.status).json(response.data);
           } catch (error) {
             res
@@ -220,7 +238,9 @@ export default class Proxy {
           res: NextApiResponse,
         ): Promise<void> {
           try {
-            const response = await this.ajax.delete(req.url);
+            const response = await this.ajax.delete(req.url, {
+              headers: { Authorization: req.cookies.jwt },
+            });
             res.status(response.status).json(response.data);
           } catch (error) {
             res
@@ -238,7 +258,9 @@ export default class Proxy {
           res: NextApiResponse,
         ): Promise<void> {
           try {
-            const response = await this.ajax.head(req.url);
+            const response = await this.ajax.head(req.url, {
+              headers: { Authorization: req.cookies.jwt },
+            });
             res.status(response.status).json(response.data);
           } catch (error) {
             res
@@ -256,7 +278,9 @@ export default class Proxy {
           res: NextApiResponse,
         ): Promise<void> {
           try {
-            const response = await this.ajax.patch(req.url, req.body);
+            const response = await this.ajax.patch(req.url, req.body, {
+              headers: { Authorization: req.cookies.jwt },
+            });
             res.status(response.status).json(response.data);
           } catch (error) {
             res
